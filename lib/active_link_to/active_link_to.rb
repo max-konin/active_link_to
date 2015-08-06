@@ -36,6 +36,7 @@ module ActiveLinkTo
     css_class.strip!
 
     wrap_tag = active_options[:wrap_tag].present? ? active_options[:wrap_tag] : nil
+    wrap_class = link_options.delete[:wrap_class]
     link_options[:class] = css_class if css_class.present?
 
     link = if active_options[:active_disable] === true && is_active_link?(url, active_options[:active])
@@ -44,7 +45,7 @@ module ActiveLinkTo
       link_to(name, url, link_options)
     end
 
-    wrap_tag ? content_tag(wrap_tag, link, :class => (css_class if css_class.present?)) : link
+    wrap_tag ? content_tag(wrap_tag, link, :class => (wrap_class if wrap_class.present?)) : link
   end
 
   # Returns css class name. Takes the link's URL and its params
